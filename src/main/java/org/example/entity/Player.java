@@ -2,7 +2,11 @@ package org.example.entity;
 
 public abstract class Player {
     final Score score;
-    private final boolean willCooperate;
+    protected boolean willCooperate;
+
+    private final int THREE_POINTS = 3;
+    private final int TWO_POINTS = 2;
+    private final int NEGATIVE_ONE_POINT = -1;
 
     public Player(boolean willCooperate) {
         this.score = new Score();
@@ -13,22 +17,27 @@ public abstract class Player {
         this.score.add(score);
     }
 
+    public Score score() {
+        return this.score;
+    }
+
     public void transactWith(Player otherPlayer) {
+        System.out.println(otherPlayer.willCooperate);
         if (this.willCooperate && otherPlayer.willCooperate) {
-            this.addScore(2);
-            otherPlayer.addScore(2);
+            this.addScore(TWO_POINTS);
+            otherPlayer.addScore(TWO_POINTS);
             return;
         }
 
-        if (this.willCooperate && !otherPlayer.willCooperate) {
-            this.addScore(-1);
-            otherPlayer.addScore(3);
+        if (this.willCooperate) {
+            this.addScore(NEGATIVE_ONE_POINT);
+            otherPlayer.addScore(THREE_POINTS);
             return;
         }
 
-        if (!this.willCooperate && otherPlayer.willCooperate) {
-            this.addScore(3);
-            otherPlayer.addScore(-1);
+        if (otherPlayer.willCooperate) {
+            this.addScore(THREE_POINTS);
+            otherPlayer.addScore(NEGATIVE_ONE_POINT);
         }
     }
 }

@@ -76,41 +76,14 @@ public class PlayerTest {
     }
 
     @Test
-    void testBothPlayersAreCheatersAndAfter5RoundBothHaveZeroPoints() {
-        Player firstPlayer = new Cheater();
-        Player secondPlayer = new Cheater();
-
-        for (int ii = 0; ii < 5; ii++) {
-            firstPlayer.transactWith(secondPlayer);
-        }
-
-        assertEquals(0, firstPlayer.score.points());
-        assertEquals(0, secondPlayer.score.points());
-    }
-
-    @Test
-    void testBothPlayersCooperateAndAfter5RoundBothHaveZeroPoints() {
-        Player firstPlayer = new Cooperator();
+    void testFirstPlayerIsCopycatAndSecondPlayerWillCooperateAndWillHave5And1PointsRespectivelyAfter2Rounds() {
+        Player firstPlayer = new Copycat();
         Player secondPlayer = new Cooperator();
 
-        for (int ii = 0; ii < 5; ii++) {
-            firstPlayer.transactWith(secondPlayer);
-        }
+        firstPlayer.transactWith(secondPlayer);
+        secondPlayer.transactWith(firstPlayer);
 
-        assertEquals(10, firstPlayer.score.points());
-        assertEquals(10, secondPlayer.score.points());
-    }
-
-    @Test
-    void testFirstPlayerIsACheaterAndSecondPlayerIsCooperatorAndAfter5RoundThereAre15AndNegative5PointsRespectively() {
-        Player firstPlayer = new Cheater();
-        Player secondPlayer = new Cooperator();
-
-        for (int ii = 0; ii < 5; ii++) {
-            firstPlayer.transactWith(secondPlayer);
-        }
-
-        assertEquals(15, firstPlayer.score.points());
-        assertEquals(-5, secondPlayer.score.points());
+        assertEquals(5, firstPlayer.score.points());
+        assertEquals(1, secondPlayer.score.points());
     }
 }
