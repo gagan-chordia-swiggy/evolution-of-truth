@@ -27,7 +27,7 @@ public class PlayerTest {
         Player player = new Player();
 
         // Act
-        player.add(3);
+        player.addCoins(3);
         int actual = player.coins();
 
         // Assert
@@ -41,7 +41,7 @@ public class PlayerTest {
 
         // Assert
         assertThrows(InvalidCoinAdditionException.class, () ->
-            player.add(-2)
+            player.addCoins(-2)
         );
     }
 
@@ -52,7 +52,7 @@ public class PlayerTest {
 
         // Assert
         assertThrows(InvalidCoinAdditionException.class, () ->
-            player.add(1)
+            player.addCoins(1)
         );
     }
 
@@ -63,7 +63,7 @@ public class PlayerTest {
 
         // Assert
         assertThrows(InvalidCoinAdditionException.class, () ->
-                player.add(4)
+                player.addCoins(4)
         );
     }
 
@@ -90,5 +90,65 @@ public class PlayerTest {
 
         // Assert
         assertTrue(actual);
+    }
+
+    @Test
+    void testBothPlayerCooperateAndHave2CoinsEach() {
+        // Arrange
+        Player firstPlayer = new Player();
+        Player secondPlayer = new Player();
+
+        // Act
+        firstPlayer.willCooperate(true);
+        secondPlayer.willCooperate(true);
+        firstPlayer.transactWith(secondPlayer);
+
+        // Assert
+        assertEquals(2, firstPlayer.coins());
+        assertEquals(2, secondPlayer.coins());
+    }
+
+    @Test
+    void testBothPlayerDoNotCooperateAndHaveZeroCoinsEach() {
+        // Arrange
+        Player firstPlayer = new Player();
+        Player secondPlayer = new Player();
+
+        // Act
+        firstPlayer.transactWith(secondPlayer);
+
+        // Assert
+        assertEquals(0, firstPlayer.coins());
+        assertEquals(0, secondPlayer.coins());
+    }
+
+    @Test
+    void testFirstPlayerCooperatesAndHasNegative1CoinAndSecondPlayerCheatsAndHas3Coins() {
+        // Arrange
+        Player firstPlayer = new Player();
+        Player secondPlayer = new Player();
+
+        // Act
+        firstPlayer.willCooperate(true);
+        firstPlayer.transactWith(secondPlayer);
+
+        // Assert
+        assertEquals(-1, firstPlayer.coins());
+        assertEquals(3, secondPlayer.coins());
+    }
+
+    @Test
+    void testFirstPlayerCheatsAndHas3CoinsAndSecondPlayerCooperatesAndHasNegative1Coin() {
+        // Arrange
+        Player firstPlayer = new Player();
+        Player secondPlayer = new Player();
+
+        // Act
+        secondPlayer.willCooperate(true);
+        firstPlayer.transactWith(secondPlayer);
+
+        // Assert
+        assertEquals(3, firstPlayer.coins());
+        assertEquals(-1, secondPlayer.coins());
     }
 }
