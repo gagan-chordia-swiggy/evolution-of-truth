@@ -1,7 +1,7 @@
 package org.example.entity;
 
 public abstract class Player {
-    Score score;
+    final Score score;
     private final boolean willCooperate;
 
     public Player(boolean willCooperate) {
@@ -12,10 +12,6 @@ public abstract class Player {
     private void addScore(int score) {
         this.score.add(score);
     }
-//
-//    public void willCooperate(boolean willCooperate) {
-//        this.willCooperate = willCooperate;
-//    }
 
     public void transactWith(Player otherPlayer) {
         if (this.willCooperate && otherPlayer.willCooperate) {
