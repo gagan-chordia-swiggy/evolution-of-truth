@@ -22,20 +22,22 @@ public abstract class Player {
     }
 
     public void transactWith(Player otherPlayer) {
-        System.out.println(otherPlayer.willCooperate);
-        if (this.willCooperate && otherPlayer.willCooperate) {
+        boolean player1WillToCooperate = this.willCooperate;
+        boolean player2WillToCooperate = otherPlayer.willCooperate;
+
+        if (player1WillToCooperate && player2WillToCooperate) {
             this.addScore(TWO_POINTS);
             otherPlayer.addScore(TWO_POINTS);
             return;
         }
 
-        if (this.willCooperate) {
+        if (player1WillToCooperate) {
             this.addScore(NEGATIVE_ONE_POINT);
             otherPlayer.addScore(THREE_POINTS);
             return;
         }
 
-        if (otherPlayer.willCooperate) {
+        if (player2WillToCooperate) {
             this.addScore(THREE_POINTS);
             otherPlayer.addScore(NEGATIVE_ONE_POINT);
         }
