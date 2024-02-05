@@ -4,9 +4,11 @@ import org.example.exceptions.InvalidCoinAdditionException;
 
 public class Player {
     private int coins;
+    private boolean willCooperate;
 
     public Player() {
         this.coins = 0;
+        this.willCooperate = false;
     }
 
     public int coins() {
@@ -18,5 +20,13 @@ public class Player {
             throw new InvalidCoinAdditionException();
         }
         this.coins += coins;
+    }
+
+    public boolean willCooperate() {
+        return willCooperate;
+    }
+
+    public void willCooperate(boolean willCooperate) {
+        this.willCooperate = willCooperate;
     }
 }

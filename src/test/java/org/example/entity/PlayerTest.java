@@ -4,7 +4,9 @@ import org.example.exceptions.InvalidCoinAdditionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerTest {
     @Test
@@ -63,5 +65,30 @@ public class PlayerTest {
         assertThrows(InvalidCoinAdditionException.class, () ->
                 player.add(4)
         );
+    }
+
+    @Test
+    void testIfThePlayerWillCooperateReturnFalse() {
+        // Arrange
+        Player player = new Player();
+
+        // Act
+        boolean actual = player.willCooperate();
+
+        // Assert
+        assertFalse(actual);
+    }
+
+    @Test
+    void testIfPlayerDecidesToCooperateReturnTrue() {
+        // Arrange
+        Player player = new Player();
+
+        // Act
+        player.willCooperate(true);
+        boolean actual = player.willCooperate();
+
+        // Assert
+        assertTrue(actual);
     }
 }
