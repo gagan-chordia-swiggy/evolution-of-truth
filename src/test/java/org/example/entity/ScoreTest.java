@@ -13,7 +13,7 @@ public class ScoreTest {
 
         score.add(3);
 
-        assertEquals(3, score.points);
+        assertEquals(3, score.points());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class ScoreTest {
 
         score.add(2);
 
-        assertEquals(2, score.points);
+        assertEquals(2, score.points());
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ScoreTest {
 
         score.add(-1);
 
-        assertEquals(-1, score.points);
+        assertEquals(-1, score.points());
     }
 
     @Test

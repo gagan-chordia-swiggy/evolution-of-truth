@@ -3,7 +3,7 @@ package org.example.entity;
 import org.example.exceptions.InvalidPointsException;
 
 public class Score {
-    int points;
+    private int points;
 
     public Score() {
         this.points = 0;
@@ -15,5 +15,9 @@ public class Score {
         }
 
         this.points += points;
+    }
+
+    public int points() {
+        return this.points;
     }
 }

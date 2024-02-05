@@ -1,51 +1,38 @@
 package org.example.entity;
 
-import org.example.exceptions.InvalidCoinAdditionException;
+public abstract class Player {
+    Score score;
+    private final boolean willCooperate;
 
-public class Player {
-    private int coins;
-    private boolean willCooperate;
-
-    public Player() {
-        this.coins = 0;
-        this.willCooperate = false;
-    }
-
-    public int coins() {
-        return this.coins;
-    }
-
-    public void addCoins(int coins) {
-        if (coins < -1 || coins == 1 || coins > 3) {
-            throw new InvalidCoinAdditionException();
-        }
-        this.coins += coins;
-    }
-
-    public boolean willCooperate() {
-        return willCooperate;
-    }
-
-    public void willCooperate(boolean willCooperate) {
+    public Player(boolean willCooperate) {
+        this.score = new Score();
         this.willCooperate = willCooperate;
     }
 
+    private void addScore(int score) {
+        this.score.add(score);
+    }
+//
+//    public void willCooperate(boolean willCooperate) {
+//        this.willCooperate = willCooperate;
+//    }
+
     public void transactWith(Player otherPlayer) {
-        if (this.willCooperate && otherPlayer.willCooperate()) {
-            this.addCoins(2);
-            otherPlayer.addCoins(2);
+        if (this.willCooperate && otherPlayer.willCooperate) {
+            this.addScore(2);
+            otherPlayer.addScore(2);
             return;
         }
 
-        if (this.willCooperate && !otherPlayer.willCooperate()) {
-            this.addCoins(-1);
-            otherPlayer.addCoins(3);
+        if (this.willCooperate && !otherPlayer.willCooperate) {
+            this.addScore(-1);
+            otherPlayer.addScore(3);
             return;
         }
 
-        if (!this.willCooperate && otherPlayer.willCooperate()) {
-            this.addCoins(3);
-            otherPlayer.addCoins(-1);
+        if (!this.willCooperate && otherPlayer.willCooperate) {
+            this.addScore(3);
+            otherPlayer.addScore(-1);
         }
     }
 }
