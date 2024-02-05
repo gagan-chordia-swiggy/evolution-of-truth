@@ -1,9 +1,6 @@
 package org.example.services;
 
-import org.example.entity.Cheater;
-import org.example.entity.Cooperator;
-import org.example.entity.Copycat;
-import org.example.entity.Player;
+import org.example.entity.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,5 +52,53 @@ class EvolutionOfTrustServiceTest {
 
         assertEquals(0, secondPlayer.score().points());
         assertEquals(0, firstPlayer.score().points());
+    }
+
+    @Test
+    void testFirstPlayerIsCopyKittenAndSecondPlayerIsCooperatorAndWillHave10PointsEachAfter5Rounds() {
+        Player firstPlayer = new CopyKitten();
+        Player secondPlayer = new Cooperator();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(5);
+
+        assertEquals(10, secondPlayer.score().points());
+        assertEquals(10, firstPlayer.score().points());
+    }
+
+    @Test
+    void testFirstPlayerIsCooperatorAndSecondPlayerIsCopyKittenAndWillHave10PointsEachAfter5Rounds() {
+        Player firstPlayer = new Cooperator();
+        Player secondPlayer = new CopyKitten();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(5);
+
+        assertEquals(10, secondPlayer.score().points());
+        assertEquals(10, firstPlayer.score().points());
+    }
+
+    @Test
+    void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHave7And11PointsAfter5Rounds() {
+        Player firstPlayer = new Grudger();
+        Player secondPlayer = new Copycat();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(5);
+
+        assertEquals(11, secondPlayer.score().points());
+        assertEquals(7, firstPlayer.score().points());
+    }
+
+    @Test
+    void testFirstPlayerIsCheaterAndSecondPlayerIsGrudgerAndWillHaveAfter5Rounds() {
+        Player firstPlayer = new Cheater();
+        Player secondPlayer = new Grudger();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(5);
+
+        assertEquals(-2, secondPlayer.score().points());
+        assertEquals(6, firstPlayer.score().points());
     }
 }
