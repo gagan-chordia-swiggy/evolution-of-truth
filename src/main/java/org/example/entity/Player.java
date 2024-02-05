@@ -25,16 +25,9 @@ public abstract class Player {
         boolean player1WillToCooperate = this.willCooperate;
         boolean player2WillToCooperate = otherPlayer.willCooperate;
 
-        if (player1WillToCooperate && player2WillToCooperate) {
-            this.addScore(TWO_POINTS);
-            otherPlayer.addScore(TWO_POINTS);
-            return;
-        }
-
         if (player1WillToCooperate) {
             this.addScore(NEGATIVE_ONE_POINT);
             otherPlayer.addScore(THREE_POINTS);
-            return;
         }
 
         if (player2WillToCooperate) {

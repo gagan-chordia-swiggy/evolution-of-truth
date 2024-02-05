@@ -81,7 +81,7 @@ public class PlayerTest {
         Player secondPlayer = new Cooperator();
 
         firstPlayer.transactWith(secondPlayer);
-        secondPlayer.transactWith(firstPlayer);
+        firstPlayer.transactWith(secondPlayer);
 
         assertEquals(5, firstPlayer.score.points());
         assertEquals(1, secondPlayer.score.points());
