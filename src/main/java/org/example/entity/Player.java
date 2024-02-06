@@ -12,16 +12,12 @@ public abstract class Player {
         this.willCooperate = willCooperate;
     }
 
-    private void gain() {
+    public void gain() {
         this.score.add(THREE_POINTS);
     }
 
-    private void invest() {
+    public void invest() {
         this.score.add(NEGATIVE_ONE_POINT);
-    }
-
-    public Score score() {
-        return this.score;
     }
 
     public void transactWith(Player otherPlayer) {
