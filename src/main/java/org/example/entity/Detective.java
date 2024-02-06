@@ -26,9 +26,12 @@ public class Detective extends Player {
             return false;
         }
 
-        if (this.roundNo <= 2&& !otherPlayer.willCooperate) {
-            this.otherPlayerNeverCheated = false;
+        if (this.roundNo == 2 && otherPlayer.willCooperate) {
             return false;
+        }
+
+        if (this.roundNo <= 2 && !otherPlayer.willCooperate) {
+            this.otherPlayerNeverCheated = false;
         }
 
         return roundNo == 2;

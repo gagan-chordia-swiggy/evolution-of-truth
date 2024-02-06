@@ -14,12 +14,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class EvolutionOfTrustServiceTest {
+class RoundsServiceTest {
     @Test
     void testBothPlayersAreCheatersAndAfter5RoundBothHaveZeroPoints() {
         Player firstPlayer = spy(new Cheater());
         Player secondPlayer = spy(new Cheater());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -33,7 +33,7 @@ class EvolutionOfTrustServiceTest {
     void testBothPlayersCooperateAndAfter5RoundBothHaveZeroPoints() {
         Player firstPlayer = spy(new Cooperator());
         Player secondPlayer = spy(new Cooperator());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -47,7 +47,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsACheaterAndSecondPlayerIsCooperatorAndAfter5RoundThereAre15AndNegative5PointsRespectively() {
         Player firstPlayer = spy(new Cheater());
         Player secondPlayer = spy(new Cooperator());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -61,7 +61,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsCheaterAndSecondPlayerWillCopyAndWillHave3AndNegative1PointsRespectivelyAfter3Rounds() {
         Player firstPlayer = spy(new Cheater());
         Player secondPlayer = spy(new Copycat());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(3);
 
@@ -75,7 +75,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsCopyKittenAndSecondPlayerIsCooperatorAndWillHave10PointsEachAfter5Rounds() {
         Player firstPlayer = spy(new CopyKitten());
         Player secondPlayer = spy(new Cooperator());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -89,7 +89,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsCooperatorAndSecondPlayerIsCopyKittenAndWillHave10PointsEachAfter5Rounds() {
         Player firstPlayer = spy(new Cooperator());
         Player secondPlayer = spy(new CopyKitten());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -103,7 +103,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHave2And2PointsAfter5Rounds() {
         Player firstPlayer = spy(new Grudger());
         Player secondPlayer = spy(new Copycat());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -117,7 +117,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsCheaterAndSecondPlayerIsGrudgerAndWillHaveNegative1And3PointsAfter5Rounds() {
         Player firstPlayer = spy(new Cheater());
         Player secondPlayer = spy(new Grudger());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
@@ -131,13 +131,13 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsDetectiveAndSecondPlayerIsCooperatorAndWillHave16And0PointsRespectivelyAfter6Rounds() {
         Player firstPlayer = spy(new Detective());
         Player secondPlayer = spy(new Cooperator());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(6);
 
         verify(firstPlayer, times(6)).gain();
-        verify(firstPlayer, times(2)).invest();
-        verify(secondPlayer, times(2)).gain();
+        verify(firstPlayer, times(1)).invest();
+        verify(secondPlayer, times(1)).gain();
         verify(secondPlayer, times(6)).invest();
     }
 
@@ -145,7 +145,7 @@ class EvolutionOfTrustServiceTest {
     void testFirstPlayerIsDetectiveAndSecondPlayerIsGrudgerAndWill5And1PointsRespectivelyHaveAfter2Rounds() {
         Player firstPlayer = spy(new Detective());
         Player secondPlayer = spy(new Grudger());
-        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+        RoundsService service = new RoundsService(firstPlayer, secondPlayer);
 
         service.transactFor(2);
 
