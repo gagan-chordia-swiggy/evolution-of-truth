@@ -4,13 +4,20 @@ public abstract class Player {
     final Score score;
     protected boolean willCooperate;
 
+    private static final int THREE_POINTS = 3;
+    private static final int NEGATIVE_ONE_POINT = -1;
+
     public Player(boolean willCooperate) {
         this.score = new Score();
         this.willCooperate = willCooperate;
     }
 
-    private void addScore(int score) {
-        this.score.add(score);
+    private void gain() {
+        this.score.add(THREE_POINTS);
+    }
+
+    private void invest() {
+        this.score.add(NEGATIVE_ONE_POINT);
     }
 
     public Score score() {
@@ -30,17 +37,14 @@ public abstract class Player {
     abstract boolean updateCooperation(Player otherPlayer);
 
     private void transact(Player otherPlayer) {
-        int THREE_POINTS = 3;
-        int NEGATIVE_ONE_POINT = -1;
-
         if (this.willCooperate) {
-            this.addScore(NEGATIVE_ONE_POINT);
-            otherPlayer.addScore(THREE_POINTS);
+            this.invest();
+            otherPlayer.gain();
         }
 
         if (otherPlayer.willCooperate) {
-            this.addScore(THREE_POINTS);
-            otherPlayer.addScore(NEGATIVE_ONE_POINT);
+            this.gain();
+            otherPlayer.invest();
         }
     }
 }

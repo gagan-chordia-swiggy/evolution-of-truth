@@ -122,4 +122,16 @@ public class PlayerTest {
         assertEquals(2, firstPlayer.score.points());
         assertEquals(2, secondPlayer.score.points());
     }
+
+    @Test
+    void testFirstPlayerIsACheaterAndSecondPlayerIsDetectiveAndWillHave3AndNegative1PointsAfter2Rounds() {
+        Player firstPlayer = new Cheater();
+        Player secondPlayer = new Detective();
+
+        firstPlayer.transactWith(secondPlayer);
+        firstPlayer.transactWith(secondPlayer);
+
+        assertEquals(3, firstPlayer.score.points());
+        assertEquals(-1, secondPlayer.score.points());
+    }
 }

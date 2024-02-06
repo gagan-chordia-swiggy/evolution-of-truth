@@ -101,4 +101,28 @@ class EvolutionOfTrustServiceTest {
         assertEquals(-1, secondPlayer.score().points());
         assertEquals(3, firstPlayer.score().points());
     }
+
+    @Test
+    void testFirstPlayerIsDetectiveAndSecondPlayerIsCooperatorAndWillHave16And0PointsRespectivelyAfter6Rounds() {
+        Player firstPlayer = new Detective();
+        Player secondPlayer = new Cooperator();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(6);
+
+        assertEquals(0, secondPlayer.score().points());
+        assertEquals(16, firstPlayer.score().points());
+    }
+
+    @Test
+    void testFirstPlayerIsDetectiveAndSecondPlayerIsGrudgerAndWill5And1PointsRespectivelyHaveAfter2Rounds() {
+        Player firstPlayer = new Detective();
+        Player secondPlayer = new Grudger();
+        EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
+
+        service.transactFor(2);
+
+        assertEquals(1, secondPlayer.score().points());
+        assertEquals(5, firstPlayer.score().points());
+    }
 }
