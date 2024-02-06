@@ -107,19 +107,19 @@ public class PlayerTest {
         firstPlayer.transactWith(secondPlayer);
         firstPlayer.transactWith(secondPlayer);
 
-        assertEquals(-2, firstPlayer.score.points());
-        assertEquals(6, secondPlayer.score.points());
+        assertEquals(-1, firstPlayer.score.points());
+        assertEquals(3, secondPlayer.score.points());
     }
 
     @Test
-    void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHaveNegative1And3PointsRespectivelyAfter2Rounds() {
+    void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHave2PointsEachAfter2Rounds() {
         Player firstPlayer = new Grudger();
         Player secondPlayer = new Copycat();
 
         firstPlayer.transactWith(secondPlayer);
         firstPlayer.transactWith(secondPlayer);
 
-        assertEquals(1, firstPlayer.score.points());
-        assertEquals(5, secondPlayer.score.points());
+        assertEquals(2, firstPlayer.score.points());
+        assertEquals(2, secondPlayer.score.points());
     }
 }

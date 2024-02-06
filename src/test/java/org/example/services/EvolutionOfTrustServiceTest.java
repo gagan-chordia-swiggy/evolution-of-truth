@@ -79,26 +79,26 @@ class EvolutionOfTrustServiceTest {
     }
 
     @Test
-    void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHave7And11PointsAfter5Rounds() {
+    void testFirstPlayerIsGrudgerAndSecondPlayerIsCopycatAndWillHave2And2PointsAfter5Rounds() {
         Player firstPlayer = new Grudger();
         Player secondPlayer = new Copycat();
         EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
-        assertEquals(11, secondPlayer.score().points());
-        assertEquals(7, firstPlayer.score().points());
+        assertEquals(2, secondPlayer.score().points());
+        assertEquals(2, firstPlayer.score().points());
     }
 
     @Test
-    void testFirstPlayerIsCheaterAndSecondPlayerIsGrudgerAndWillHaveAfter5Rounds() {
+    void testFirstPlayerIsCheaterAndSecondPlayerIsGrudgerAndWillHaveNegative1And3PointsAfter5Rounds() {
         Player firstPlayer = new Cheater();
         Player secondPlayer = new Grudger();
         EvolutionOfTrustService service = new EvolutionOfTrustService(firstPlayer, secondPlayer);
 
         service.transactFor(5);
 
-        assertEquals(-2, secondPlayer.score().points());
-        assertEquals(6, firstPlayer.score().points());
+        assertEquals(-1, secondPlayer.score().points());
+        assertEquals(3, firstPlayer.score().points());
     }
 }
